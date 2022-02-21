@@ -1,5 +1,5 @@
 ﻿using System;
-using Demo.WebAPI.Configurations;
+using System.Reflection;
 using Demo.WebAPI.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
@@ -20,7 +20,7 @@ public static class Program
                 .WriteTo.Console()
                 .CreateBootstrapLogger();
 
-            Log.Information($"[STARTING] {Settings.SERVICE_NAME}");
+            Log.Information($"[STARTING] {Assembly.GetEntryAssembly()?.GetName()?.Name}");
 
 
             CreateHostBuilder(args)

@@ -27,6 +27,7 @@ internal static class LogExtensions
         return app;
     }
 
+
     private static void _enrichFromRequest(IDiagnosticContext diagnosticContext, HttpContext httpContext)
         => diagnosticContext.Set("CorrelationId", httpContext.GetCorrelationId());
 
