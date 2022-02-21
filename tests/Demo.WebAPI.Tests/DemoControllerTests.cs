@@ -19,7 +19,8 @@ public class DemoControllerTests
 
 
         // Assert
-        act.EnsureSuccessStatusCode();
+        act.Should()
+            .Match(m => m.IsSuccessStatusCode);
     }
 
     [Fact]
@@ -30,7 +31,8 @@ public class DemoControllerTests
 
 
         // Assert
-        act.EnsureSuccessStatusCode();
+        act.Should()
+            .Match(m => m.IsSuccessStatusCode);
     }
 
     [Fact]
@@ -41,7 +43,8 @@ public class DemoControllerTests
 
 
         // Assert
-        act.EnsureSuccessStatusCode();
+        act.Should()
+            .Match(m => m.IsSuccessStatusCode);
     }
 
     [Fact]
@@ -52,7 +55,8 @@ public class DemoControllerTests
 
 
         // Assert
-        act.EnsureSuccessStatusCode();
+        act.Should()
+            .Match(m => m.IsSuccessStatusCode);
     }
 
     [Fact]
@@ -63,7 +67,8 @@ public class DemoControllerTests
 
 
         // Assert
-        act.EnsureSuccessStatusCode();
+        act.Should()
+            .Match(m => m.IsSuccessStatusCode);
     }
 
     [Fact]
@@ -74,7 +79,8 @@ public class DemoControllerTests
 
 
         // Assert
-        act.EnsureSuccessStatusCode();
+        act.Should()
+            .Match(m => m.IsSuccessStatusCode);
     }
 
     [Fact]
@@ -85,6 +91,7 @@ public class DemoControllerTests
 
 
         // Assert
-        act.EnsureSuccessStatusCode();
+        act.Should()
+            .Match(m => m.IsSuccessStatusCode);
     }
 }

@@ -1,43 +1,23 @@
 ﻿using System;
 using System.Diagnostics;
-using Demo.WebAPI.Configurations;
-using Demo.WebAPI.Controllers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Serilog;
-using Serilog.Exceptions;
 
 namespace Demo.WebAPI.Extensions;
 
 internal static class LogExtensions
 {
-    private const string OUTPUT_TEMPLATE = "[{Timestamp:HH:mm:ss.fffffff} {Level:u3}] {Message:lj} {Properties:j}{NewLine}{Exception}";
-
-    public static void AddSerilog(this IConfigurationBuilder configuration)
+    public static LoggerConfiguration Configure(this HostBuilderContext context, LoggerConfiguration loggerConfiguration, IServiceProvider serviceProvider)
     {
-        var settings = configuration.Build();
-        var logPath = settings.GetValue<string>(nameof(APIConfig.LOG_PATH));
-        if(string.IsNullOrWhiteSpace(logPath))
-        {
-            logPath = Settings.LOG_PATH_DEFAULT;
-        }
+        loggerConfiguration
+            .ReadFrom.Configuration(context.Configuration)
+            .ReadFrom.Services(serviceProvider);
 
-        Log.Logger = new LoggerConfiguration()
-            .Enrich.FromLogContext()
-            .Enrich.WithExceptionDetails()
-            .Enrich.WithProperty("MachineName", Environment.MachineName)
-            .WriteTo.Async(a =>
-            {
-                a.Console(outputTemplate: OUTPUT_TEMPLATE);
-                a.File(
-                    outputTemplate: OUTPUT_TEMPLATE,
-                    path: logPath,
-                    rollingInterval: RollingInterval.Day
-                );
-            })
-            .CreateLogger();
+        return loggerConfiguration;
     }
+
 
     public static IApplicationBuilder UseSerilog(this IApplicationBuilder app)
     {

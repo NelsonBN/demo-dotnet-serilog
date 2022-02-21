@@ -4,6 +4,7 @@ using Demo.WebAPI.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using Serilog.Events;
 
 namespace Demo.WebAPI;
 
@@ -13,18 +14,25 @@ public static class Program
     {
         try
         {
-            var hostBuilder = CreateHostBuilder(args).Build();
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                .Enrich.FromLogContext()
+                .WriteTo.Console()
+                .CreateBootstrapLogger();
 
             Log.Information($"[STARTING] {Settings.SERVICE_NAME}");
 
-            hostBuilder.Run();
+
+            CreateHostBuilder(args)
+                .Build()
+                .Run();
+
 
             return 0;
         }
-        catch(Exception ex)
+        catch(Exception exception)
         {
-            Log.Fatal(ex, "The host had an unexpected error");
-
+            Log.Fatal(exception, "Host terminated unexpectedly");
             return 1;
         }
         finally
@@ -35,12 +43,10 @@ public static class Program
 
     public static IHostBuilder CreateHostBuilder(string[] args)
         => Host.CreateDefaultBuilder(args)
-            .UseSerilog()
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                webBuilder.ConfigureAppConfiguration((hostingContext, config)
-                    => config.AddSerilog()
-                );
-                webBuilder.UseStartup<Startup>();
-            });
+            .UseSerilog((context, services, configuration)
+                => context.Configure(configuration, services)
+            )
+            .ConfigureWebHostDefaults(webBuilder
+                => webBuilder.UseStartup<Startup>()
+            );
 }
