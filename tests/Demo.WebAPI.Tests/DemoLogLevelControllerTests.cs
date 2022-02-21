@@ -3,11 +3,11 @@
 namespace Demo.WebAPI.Tests;
 
 [Collection(nameof(IntegrationApiTestsFixtureCollection))]
-public class DemoControllerTests
+public class DemoLogLevelControllerTests
 {
     private readonly IntegrationTestsFixture _testsFixture;
 
-    public DemoControllerTests(IntegrationTestsFixture testsFixture)
+    public DemoLogLevelControllerTests(IntegrationTestsFixture testsFixture)
         => _testsFixture = testsFixture;
 
 
@@ -15,7 +15,7 @@ public class DemoControllerTests
     public async void Logger_Trace_200()
     {
         // Arrange && Act
-        var act = await _testsFixture.Client.GetAsync("demo/trace");
+        var act = await _testsFixture.Client.GetAsync("demo-log-level/trace");
 
 
         // Assert
@@ -27,7 +27,7 @@ public class DemoControllerTests
     public async void Logger_Debug_200()
     {
         // Arrange && Act
-        var act = await _testsFixture.Client.GetAsync("demo/debug");
+        var act = await _testsFixture.Client.GetAsync("demo-log-level/debug");
 
 
         // Assert
@@ -39,7 +39,7 @@ public class DemoControllerTests
     public async void Logger_Info_200()
     {
         // Arrange && Act
-        var act = await _testsFixture.Client.GetAsync("demo/info");
+        var act = await _testsFixture.Client.GetAsync("demo-log-level/info");
 
 
         // Assert
@@ -51,7 +51,7 @@ public class DemoControllerTests
     public async void Logger_Warning_200()
     {
         // Arrange && Act
-        var act = await _testsFixture.Client.GetAsync("demo/warning");
+        var act = await _testsFixture.Client.GetAsync("demo-log-level/warning");
 
 
         // Assert
@@ -63,7 +63,7 @@ public class DemoControllerTests
     public async void Logger_Error_200()
     {
         // Arrange && Act
-        var act = await _testsFixture.Client.GetAsync("demo/error");
+        var act = await _testsFixture.Client.GetAsync("demo-log-level/error");
 
 
         // Assert
@@ -75,7 +75,7 @@ public class DemoControllerTests
     public async void LoggerException_200()
     {
         // Arrange && Act
-        var act = await _testsFixture.Client.GetAsync("demo/exception");
+        var act = await _testsFixture.Client.GetAsync("demo-log-level/exception");
 
 
         // Assert
@@ -87,7 +87,7 @@ public class DemoControllerTests
     public async void Logger_Critical_200()
     {
         // Arrange && Act
-        var act = await _testsFixture.Client.GetAsync("demo/critical");
+        var act = await _testsFixture.Client.GetAsync("demo-log-level/critical");
 
 
         // Assert

@@ -5,12 +5,12 @@ using Microsoft.Extensions.Logging;
 namespace Demo.WebAPI.Controllers;
 
 [ApiController]
-[Route("[controller]")]
-public class DemoController : ControllerBase
+[Route("demo-log-level")]
+public class DemoLogLevelController : ControllerBase
 {
-    private readonly ILogger<DemoController> _logger;
+    private readonly ILogger<DemoLogLevelController> _logger;
 
-    public DemoController(ILogger<DemoController> logger)
+    public DemoLogLevelController(ILogger<DemoLogLevelController> logger)
         => _logger = logger;
 
 
