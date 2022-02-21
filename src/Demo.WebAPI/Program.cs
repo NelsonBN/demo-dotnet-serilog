@@ -1,8 +1,8 @@
 ﻿using System;
 using Demo.WebAPI.Configurations;
 using Demo.WebAPI.Extensions;
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 using Serilog;
 
 namespace Demo.WebAPI;
@@ -13,7 +13,7 @@ public static class Program
     {
         try
         {
-            var hostBuilder = CreateWebHostBuilder(args).Build();
+            var hostBuilder = CreateHostBuilder(args).Build();
 
             Log.Information($"[STARTING] {Settings.SERVICE_NAME}");
 
@@ -33,11 +33,14 @@ public static class Program
         }
     }
 
-    public static IWebHostBuilder CreateWebHostBuilder(string[] args)
-        => WebHost.CreateDefaultBuilder(args)
-        .ConfigureAppConfiguration((hostingContext, config)
-            => config.AddSerilog()
-        )
-        .UseSerilog()
-        .UseStartup<Startup>();
+    public static IHostBuilder CreateHostBuilder(string[] args)
+        => Host.CreateDefaultBuilder(args)
+            .UseSerilog()
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.ConfigureAppConfiguration((hostingContext, config)
+                    => config.AddSerilog()
+                );
+                webBuilder.UseStartup<Startup>();
+            });
 }
