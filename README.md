@@ -8,3 +8,6 @@ Demo .NET with Serilog
 - Serilog
   - [Serilog.AspNetCore](https://github.com/serilog/serilog-aspnetcore#serilogaspnetcore---)
   - [Configuration Basics](https://github.com/serilog/serilog/wiki/Configuration-Basics)
+  - [appsettings.json](https://github.com/serilog/serilog-settings-configuration/)
+  - [Json formatting](https://github.com/serilog/serilog-formatting-compact)
+  - [SerilogTimings](https://github.com/nblumhardt/serilog-timings)
