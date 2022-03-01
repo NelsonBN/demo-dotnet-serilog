@@ -2,13 +2,13 @@
 using Microsoft.AspNetCore.Http;
 using Serilog.Context;
 
-namespace Demo.WebAPI.Extensions;
+namespace Demo.WebAPI.Setups;
 
-internal class RequestLogMiddleware
+internal class LoggerMiddleware
 {
     private readonly RequestDelegate _next;
 
-    public RequestLogMiddleware(RequestDelegate next)
+    public LoggerMiddleware(RequestDelegate next)
         => _next = next;
 
     public Task Invoke(HttpContext context)

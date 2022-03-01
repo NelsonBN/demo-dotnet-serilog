@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
-namespace Demo.WebAPI.Extensions;
+namespace Demo.WebAPI.Setups;
 
-internal static class LogExtensions
+internal static class LoggerSetup
 {
     public static LoggerConfiguration Configure(this HostBuilderContext context, LoggerConfiguration loggerConfiguration, IServiceProvider serviceProvider)
     {
@@ -22,7 +22,7 @@ internal static class LogExtensions
     public static IApplicationBuilder UseSerilog(this IApplicationBuilder app)
     {
         app.UseSerilogRequestLogging(c => c.EnrichDiagnosticContext = _enrichFromRequest);
-        app.UseMiddleware<RequestLogMiddleware>();
+        app.UseMiddleware<LoggerMiddleware>();
 
         return app;
     }

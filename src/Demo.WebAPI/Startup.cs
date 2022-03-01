@@ -1,4 +1,4 @@
-﻿using Demo.WebAPI.Extensions;
+﻿using Demo.WebAPI.Setups;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
